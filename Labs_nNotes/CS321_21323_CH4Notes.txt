@@ -1,0 +1,94 @@
+2/13/2023 Lecture notes
+
+Weekly Updates
+	- One more day given to work on the Lab 1 programming problem!
+		○ Allowing to do fixing to code by tonight.
+	- By tomorrow/tonight, Lab 2 programming assignment will be included on Canvas!
+		○ Nothing about another continuous learning essay was said, but expect it to be up on canvas as well!
+
+
+Continued through chapter 4: Threads Slides
+-> we started from the very first slide and walked through reviewing each.
+
+	- Threads are always limited by the resources of a process as well as the process that is required to perform.
+	- Multiprocessing is not limited in this way; they have multiple options for operating and are not limited by the single process.
+		○ This is also known as multicore processing! 
+
+	- Parallelism: two different sets of resources to perform a single task on a system
+		○ There are two kinds of parallelism
+			§ Data parallelism: distributes  the same data across multiple cores, each with the same operation
+			§ Task parallelism: distributed across cores but each has their own unique operation.
+	- Concurrency: uses the same resources to perform a single task
+		○ Has issues with overwriting/overreading data in the memory, which is where locks come in.
+
+
+->we discussed FPGA task parallelism
+	- FPGA : Field Programmable
+	- This devices or generally in the form of microprocessors, work task parallelism on the hardware level; changing logic gates within the physical hardware. These are what is used to speed up and parallelism the wordflow of the hardware.
+	
+#note that hardware level parallelism in the intel world is also considered Hyperthreading!#
+
+AMDAHL'S LAW!
+	- This is a basic formula that identifies the speedup potential based on S and N…
+		○ I would look at the slides and get familiar with this!  I have another class that discusses this and I have already used this although a different form of the equation so let me know if you need help w this! The slide included in chapter 4 is pretty easy to understand through.
+
+User Threads and Kernel Threads
+	- User threads: management done by user-level threads library generally within a program like java threads, or the OS like windows threads….
+		○ We will be learning about POSIX threads which is the threading in Linux.
+	- Kernel threads: supported by the kernel.
+		○ We might be doing a little bit of this later on in the semester.
+		○ Virtually all general purpose operating systems offer and allow these.
+
+Multithreading Models
+	- Many to one mapping: many user level threads map to a single kernel level thread.
+		○ On the user level, we are getting the impression of parallel threading but on the kernel level, it becomes concurrence.
+	- One to one mapping: one user level thread to one kernel thread
+	- Many to many mapping: many different user threads are mapped to many kernel level threads.
+		○ Fairly common in programming and a bit harder to wrap your head around…
+		○ View slide for more info and view google!
+
+Thread libraries
+	- Thread libraries provide programmers with API for information needed for threading
+		○ In this class for Linux we will be using Pthreads
+			§ There is a slide about Pthreads as well as an example of using Pthreads within the chapter slides
+
+Implicit threading
+	- As the number of threads increase, program correction and synchronization becomes more difficult with explicit threads.
+	- So the creation and management of threads done by compilers and run-time libraries rather than programmers
+		○ These methods are thread pools, openMP (covered in CS301) and grand central dispatch.
+		○ Java.util.concurrent package and microsoft threading building blocks (TBB) are other examples too
+
+-> abstraction: essentially, a separation between the backend and frontend of a program, making it so a programmer or user cannot access the back end of the program, of the farthest layer from what is being used by the user.
+	- This is achieved by different libraries within a program.
+	
+Thread Pools
+	- Esentially creates a bunch of threads for you where they await doing work for you
+		○ This is not very good for resource consumption… unless the thread pool only pulls what is needed when needed, it will use more power trying to hold space for all the threads built
+
+OpenMP (we will be doing this in lab Friday)
+	- Provides support for parallel programming in shared-memory environments
+	- This waits for the user level call before creating the thread
+		○ This does not use message signals from the user. It does it on its own under the base layer of code to send calls to the library through the shared memory space.
+
+Grand central dispatch (MacOS)
+	- There are two different types, serial and concurrent.
+	- Not really covered and there will be NO PROBLEMS ON THE EXAM OR QUIZ since we will not be covering in class
+
+Threading Issues
+	- Semantics of fork() and exec() system calls
+	- Signal handling
+		○ Synchronous and asynchronous handling are the two options
+	- Thread cancellation of target thread: asynchronous or deferred
+	- Thread-local storage
+	- Scheduler activations
+
+->these threading issues should be considered in terms of the user type (or experience) that will be operating the computer, the operations the computer will be performing, as well as several other things to determine how you should handle the information and issue that occurs and how you should properly adjust the issue for the correct operations you wish to perform in terms of optimization.
+
+Thread-lock storage
+	- REVIEW DID NOT COVER IN CLASS
+
+Scheduler Activations
+	- Discussed in the next few lectures. There is a slide in the chapter 4 slides that discusses it but we will hopefully get some hands on information on the usage of this.
+
+The rest of the slides are examples of windows and Linux threads as well as their structure and items.
+-> from this slide on [OPERATING SYSTEM THREADS: WINDOWS THREADS AND LINUX THREADS] the slides are not written in the syllabus and are not required to cover although I would to get a better understanding of the Linux threading which we will be using later on this week and semester.
