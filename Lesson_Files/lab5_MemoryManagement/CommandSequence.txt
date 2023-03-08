@@ -1,0 +1,10 @@
+g++ -fPIC -c -Wall pal.cpp #Compile the library
+ld -shared pal.o -o libpal.so #Add the library in a shared object
+g++ -Wall main.cpp -lpal #Try compiling the main program with the library
+                         #But it will give following error saying the library not found
+			 #      /usr/bin/ld: cannot find -lpal
+                         #      collect2: error: ld returned 1 exit status
+g++ -Wall -L<path/to/currnt/dir> -Wl,-rpath=<path/to/current/dir> main.cpp -lpal
+
+
+

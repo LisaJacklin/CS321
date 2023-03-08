@@ -8,9 +8,6 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
-
-#include <sys/wait.h>
-
 int main()
 {
     // Fork returns process id
@@ -20,14 +17,13 @@ int main()
     // Parent process
     if (child_pid > 0){
 	printf("It is parent");
-	wait(null); //this requires #include <sys/wait.h>
+	//wait(null)
         sleep(50);
     }
 
     // Child process
     else{
 	printf("It is child");
-	wait(null); 	//no idea if this is actually needed but it's here if so
         exit(0);
     }
 
