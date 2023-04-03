@@ -1,0 +1,63 @@
+///////////////////////////////////////////////
+Lisa Jacklin
+CS 321 Operating Systems
+Lecture Notes 3/27/2023
+///////////////////////////////////////////////
+
+Midterms are almost done being graded and hoping wednesday we will get them back
+
+////////////////////////////////////////////////////
+Chapter 9: Memory Management -> Virtual Memory
+
+demand paging is our main focus today: demaid paging is when an OS is demanding memory
+
+page vs frame:
+- page is in the virtual memory
+- frame is the physical memory 
+
+
+page fault
+- if there is a reference to a page, first reference to that page will trap to OS
+- when the OS requests a page that does not exist
+- when a process tries to find a page that is not in memory and must be swapped in from physical memory to be used without fault
+
+->THIS IS IMPORTANT FOR QUIZ AND OR EXAM!<-
+Steps in handling a page fault
+1. reference page table, 
+2. trap OS
+3. page is on the backing store
+...
+->the rest of the steps are on slide 16 of ch 9
+
+performance of demanding paging
+- the demand paging, the more time spend waiting for the operation to complete
+
+stages:
+- trap to the OS
+- save the user registers and process state
+-determine that the interrupt was a page fault
+- check that the page reference was legal and determine the location of the page on the memory
+- issue a read from the disk to a free frame
+- while waiting, allocate the CPU to some other 
+... more on slide 19...
+
+three major activities
+- service the interrupt : far less time than reading the page
+- read the page : takes a larger amount of time to read that data
+- restart the process: only a small amount of time
+
+page fault rate 0 =< p =< 1
+- if p = 0 no page faults
+- if p = 1 every reference is at fault
+
+Effective Access Time (EAT)
+	EAT = (1-p) x memory access + p (page fault overhead + swap page out + swap page in)
+
+
+-> I would go through and make sure you understand the EAT equation! 
+	- you can check your understanding with example on slide 21
+	- note that the average page-fault service time can include any of the three major activities listed above.
+
+-> END OF MAJOR IMPORTANCE ON TESTS/QUIZES <-
+
+
