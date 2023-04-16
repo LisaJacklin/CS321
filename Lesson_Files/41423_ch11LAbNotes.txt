@@ -1,0 +1,11 @@
+4/14/2023
+
+CS 31 OS ch 11 DiskManagement Lab Notes
+
+- only those with root or sudo permissions can add a user
+ -for every user there is a home directory
+
+-command sw [name] is used to change between users within a single terminal so long as the correct password is given. This means we are in the new home directory
+-command pwd will give the current directory you are in
+
+-setting up a group of users ; generally done to make it easier for admins and larger organizations to fix issues and permissions.
