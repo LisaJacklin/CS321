@@ -63,4 +63,4 @@ usermod -a -G myfsuser testuser3
 
 chmod 070 myFAT #note the zeros means no permissions unless part of the group
 
-#8:
+#8:now a short progam 
