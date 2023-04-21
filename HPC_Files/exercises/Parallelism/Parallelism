@@ -1,0 +1,18 @@
+Background Processes
+=====================
+
+1.) In the Processes directory there is a simple Python program that calculates and compares md5sums of strings, trying to find a match, 50000 times. Modify the slurm script to launch 24 copies of this job, and direct its output to separate files.
+
+You can launch background processes with "&" and will need to wait for them all to finish
+
+OpenMP
+=======
+
+1.) In the OpenMP directory there are two programs. First is "hello_world.c". Compile this with both the foss and intel toolchains. Using the man pages for gcc (searching for openmp) and using icc -help openmp will be useful here.
+
+2.) calculate_area.cpp is a simple program that will calculate the area of 100000 rectangles in a serial fashion. Update this to use OpenMP to distribute the work across threads.
+
+MPI
+====
+
+1.) Look through the various MPI Monte Carlo Pi calculations. Compile one (or more of them) and modify the mpisubmit.slurm script to run the job on Chinook.

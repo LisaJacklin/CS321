@@ -1,0 +1,61 @@
+Basic HPC Usage
+
+Topics Covered: Modules, Chinook specific commands, Slurm
+
+1.) Try running various module commands and see how they change your environment variables as well as what modules
+become available
+
+Module Commands
+================
+module help
+module avail
+module list
+module spider Python
+module spider slurm
+module purge
+module avail
+echo $PATH; echo $LD_LIBRARY_PATH
+module load foss/2022a
+echo $PATH; echo $LD_LIBRARY_PATH
+module avail
+module list
+
+Chinook Specific
+=================
+show_storage
+qmap
+
+2.) Try running some Slurm commands to get information about slurm and the partitions (make sure the slurm module is loaded)
+
+Basic Commands
+===============
+sinfo
+squeue
+
+srun Exercises
+===============
+srun --reservation=cs321 -p debug --ntasks=1 --tasks-per-node=1 --time=00:01:00 echo "Hello world"
+srun --reservation=cs321-p debug --ntasks=24 --tasks-per-node=24 --time=00:01:00 echo "Hello world"
+srun -p --reservation=cs321 debug --ntasks=1 --tasks-per-node --time=00:01:00 --output=example.%j printenv
+Check the various environment variables that are set (compare to a printenv of your current terminal)
+
+sbatch Exercises
+=================
+Copy the template.slurm file to your $CENTER1 or $HOME directory and modify the email address, job name, and output file, and add the "Reservation" SBATCH directive.
+
+Submit using:
+
+sbatch template.slurm
+
+Lustre Exercises
+=================
+
+1.) Create a new directory in your $CENTER1 (/center1/CS321/username) directory. Run
+
+lfs getstripe directoryname
+
+Create a new file in that directory and run lfs getstripe on that
+
+Run lfs setstripe -c 10 -S 32m on the new directory and create another new file
+
+Run lfs getstripe on the new file
