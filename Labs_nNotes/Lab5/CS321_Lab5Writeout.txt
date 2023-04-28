@@ -1,0 +1,64 @@
+#CS 321
+#Lab 5 HPC
+#Team: Lisa Jacklin, Jewel Maldonado
+
+#1. log into Chinook HPC; note that to do this, ssh [username].chinook04@alaska.edu was used
+
+#2. create a text file 'test.txt' with numbers 1-100000 in your home directory (in shell)
+#the following is what is contained in the shell file:
+
+#!/bin/bash
+
+for i in {1..100000}
+do
+    echo $i >> test.txt
+done
+
+#3. write a c/cpp program to read the numbers from the file and calculate the sum.
+#the following program is what is contained in a .c file:
+
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main() {
+    ifstream infile("test.txt"); // Open the file
+    int num, sum = 0;
+    
+    while (infile >> num) { // Read the numbers from the file
+        sum += num; // Add each number to the sum
+    }
+    
+    cout << "The sum is: " << sum << endl; // Print the sum
+    
+    infile.close(); // Close the file
+    
+    return 0;
+}
+
+#4. write a slurm script to submit the job to HPC and store the output in a file.
+#here is the following slurm script:
+
+#!/bin/bash
+#SBATCH --job-name=sum_numbers # Job name
+#SBATCH --nodes=1 # Number of nodes
+#SBATCH --ntasks-per-node=1 # Number of tasks (processes) per node
+#SBATCH --cpus-per-task=1 # Number of CPU cores per task
+#SBATCH --time=00:10:00 # Wall time limit (hh:mm:ss)
+#SBATCH --mem=1G # Memory limit per node
+#SBATCH --output=sum_numbers.out # Output file name
+#SBATCH --error=sum_numbers.err # Error file name
+
+# Load any necessary modules or activate a virtual environment
+# For example:
+# module load gcc/9.3.0
+
+# Navigate to the directory containing the executable program and input file
+cd /path/to/program/directory
+
+# Run the program and redirect the output to a file
+./sum_numbers > sum_numbers_output.txt
+
+
+#5. the location of the output file
