@@ -2,20 +2,26 @@
 #Lab 5 HPC
 #Team: Lisa Jacklin, Jewel Maldonado
 
-#1. log into Chinook HPC; note that to do this, ssh [username].chinook04@alaska.edu was used
+#1. log into Chinook HPC; note that to do this, ssh [username]@chinook04.alaska.edu was used
 
 #2. create a text file 'test.txt' with numbers 1-100000 in your home directory (in shell)
-#the following is what is contained in the shell file:
+#the following is what is contained in the shell file: 
+
+#file name: test.sh
+#note that we must give this file permission to write in order for it to operate
 
 #!/bin/bash
 
-for i in {1..100000}
+for i in (1..100000)
 do
     echo $i >> test.txt
 done
 
+#after running this, we went to step 3
 #3. write a c/cpp program to read the numbers from the file and calculate the sum.
 #the following program is what is contained in a .c file:
+
+#test.cpp 
 
 #include <iostream>
 #include <fstream>
@@ -41,24 +47,27 @@ int main() {
 #here is the following slurm script:
 
 #!/bin/bash
-#SBATCH --job-name=sum_numbers # Job name
-#SBATCH --nodes=1 # Number of nodes
-#SBATCH --ntasks-per-node=1 # Number of tasks (processes) per node
-#SBATCH --cpus-per-task=1 # Number of CPU cores per task
-#SBATCH --time=00:10:00 # Wall time limit (hh:mm:ss)
-#SBATCH --mem=1G # Memory limit per node
-#SBATCH --output=sum_numbers.out # Output file name
-#SBATCH --error=sum_numbers.err # Error file name
 
-# Load any necessary modules or activate a virtual environment
-# For example:
-# module load gcc/9.3.0
+#SBATCH --job-name="Lab5TestSlurm"
+#SBATCH --partition=debug
+#SBATCH --ntasks=24
+#SBATCH --tasks-per-node=24
+#SBATCH --time=00:01:00
+#SBATCH --mail-user=jnmaldonado.Chinook04@example.edu
+#SBATCH --mail-type=BEGIN
+#SBATCH --mail-type=END
+#SBATCH --mail-type=FAIL
+#SBATCH --output="output.%j"
 
 # Navigate to the directory containing the executable program and input file
-cd /path/to/program/directory
+cd /home/jnmaldonado
 
+#now to run the file
+gcc /home/jnmaldonado test.sh
 # Run the program and redirect the output to a file
 ./sum_numbers > sum_numbers_output.txt
 
 
 #5. the location of the output file
+#is on /home/jnmaldonado with test.sh, and test.txt
+#output file name : output
